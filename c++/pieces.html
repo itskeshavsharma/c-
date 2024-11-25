@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Human Facts</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #121212, #1a1a1a);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px #00ff88;
+        }
+
+        .fact-container {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .fact-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .fact-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fact-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .button {
+            background: linear-gradient(135deg, #00ff88, #00cc6f);
+            color: #121212;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 0.5rem;
+            box-shadow: 0 5px 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .share-button {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+        }
+
+        .share-button:hover {
+            box-shadow: 0 10px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            animation: float 8s infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            top: 50%;
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            bottom: 15%;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            text-align: center;
+        }
+
+        footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .fact-container {
+                padding: 1.5rem;
+                min-height: 150px;
+            }
+
+            .fact-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+
+    <div class="container">
+        <h1>Human Facts</h1>
+        <div class="fact-container">
+            <p class="fact-text" id="factText">Click the button below to generate a random human fact!</p>
+        </div>
+        <button class="button" id="generateBtn">Generate Fact</button>
+        <button class="button share-button" id="shareBtn">Copy to Clipboard</button>
+    </div>
+
+    <footer>
+        Made with 💚 by <a href="#">keshav</a>
+    </footer>
+
+    <script>
+        const facts = [
+            "The human body contains enough carbon to make around 900 pencils.",
+            "The average person spends 6 months of their lifetime waiting for red lights to turn green.",
+            "Your brain uses 20% of the total oxygen in your body.",
+            "The human body contains enough fat to make 7 bars of soap.",
+            "The average person walks the equivalent of 5 times around the world in their lifetime.",
+            "Your heart beats around 100,000 times every day.",
+            "Humans are the only animals that blush.",
+            "The human body contains enough iron to make a 3-inch nail.",
+            "You lose about 100 hairs from your scalp every day.",
+            "Your body produces enough saliva to fill two swimming pools in a lifetime.",
+            "The average person has 67 different species of bacteria in their belly button.",
+            "Human bones are ounce for ounce stronger than steel.",
+            "The human eye can distinguish between approximately 10 million different colors.",
+            "Your nose can remember 50,000 different scents.",
+            "The human brain can process images that the eyes see in just 13 milliseconds."
+        ];
+
+        const factText = document.getElementById('factText');
+        const generateBtn = document.getElementById('generateBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        let currentFact = '';
+
+        function generateFact() {
+            factText.classList.remove('show');
+            
+            setTimeout(() => {
+                let newFact;
+                do {
+                    newFact = facts[Math.floor(Math.random() * facts.length)];
+                } while (newFact === currentFact && facts.length > 1);
+                
+                currentFact = newFact;
+                factText.textContent = currentFact;
+                factText.classList.add('show');
+            }, 500);
+        }
+
+        async function copyToClipboard() {
+            try {
+                if (currentFact) {
+                    await navigator.clipboard.writeText(currentFact);
+                    const originalText = shareBtn.textContent;
+                    shareBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        shareBtn.textContent = originalText;
+                    }, 2000);
+                } else {
+                    alert("Please generate a fact first!");
+                }
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        generateBtn.addEventListener('click', generateFact);
+        shareBtn.addEventListener('click', copyToClipboard);
+
+        // Generate the first fact on page load
+        generateFact();
+    </script>
+</body>
+</html>
